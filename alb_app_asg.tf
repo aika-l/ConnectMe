@@ -3,7 +3,7 @@
 # Target group  for the app (port 80)
 
 resource "aws_lb_target_group" "app" {
-    name        = substr("{var.project_name}-tg", 0, 32)
+    name        = substr("${var.project_name}-tg", 0, 32)
     port        = 80
     protocol    = "HTTP"
     target_type = "instance"
@@ -26,7 +26,7 @@ resource "aws_lb" "public" {
     security_groups     = [aws_security_group.alb.id]
     subnets             = [for s in aws_subnet.public : s.id]
     enable_deletion_protection  = false
-    tags    = merge(local.tags, { Name = "{var.project_name}-alb" }) 
+    tags    = merge(local.tags, { Name = "${var.project_name}-alb" }) 
 }
 
 resource "aws_lb_listener" "http" {
@@ -83,7 +83,8 @@ resource "aws_autoscaling_group" "app" {
     min_size            = var.min_size
     max_size            = var.max_size
     vpc_zone_identifier = [for s in aws_subnet.app : s.id ]
-    health_check_type   = "ELB" health_check_grace_period = 90
+    health_check_type   = "ELB" 
+    health_check_grace_period = 90
     launch_template {
         id  = aws_launch_template.app.id
         version = "$Latest"

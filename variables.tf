@@ -85,12 +85,12 @@ variable "db_password" {
 
 variable "db_allocated_storage" {
   type    = number
-  default = 10
+  default = 20
 }
 
 variable "db_instance_class" {
   type    = string
-  default = "db.t2.micro"
+  default = "db.t3.micro"
 }
 
 

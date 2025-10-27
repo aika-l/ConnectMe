@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
     tags = merge(local.tags, { Name = "${var.project_name}-vpc" })
 }
 
-resource "aws_nternet_gateway" "igw" {
+resource "aws_internet_gateway" "igw" {
     vpc_id = aws_vpc.main.id
     tags   = merge(local.tags, { Name = "${var.project_name}-igw" })
 }

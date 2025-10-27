@@ -1,13 +1,13 @@
 # Subnet group for RDS (private DB subnets)
 resource "aws_db_subnet_group" "db" {
-    name        = "${var.project_name}-db-subnets"
+    name        = lower("${var.project_name}-db-subnets")
     subnet_ids  = [for s in aws_subnet.db : s.id]
     tags        = merge(local.tags, { Name = "${var.project_name}-db-subnets"})
 }
 
 # MySQL instance (Multi-AZ true to mirror the diagram)
 resource "aws_db_instance" "mysql" {
-    indentifier             = lower("${var.project_name}-mysql")
+    identifier             = lower("${var.project_name}-mysql")
     engine                  = "mysql"
     engine_version          = "8.0"
     instance_class          = var.db_instance_class
@@ -18,9 +18,9 @@ resource "aws_db_instance" "mysql" {
     multi_az                = true
     username                = var.db_username 
     password                = var.db_password
-    db_username             = "connectwithme"
+    db_name                 = "connectwithme"
     skip_final_snapshot     = true
-    deleteion_protection    = false
+    deletion_protection     = false
     publicly_accessible     = false
     backup_retention_period = 5
     copy_tags_to_snapshot   = true
