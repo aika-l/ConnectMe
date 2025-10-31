@@ -1,6 +1,7 @@
 # ConnectWithMe
 Three-Tier Architecture
 
+<img width="761" height="501" alt="3-tier-app" src="https://github.com/user-attachments/assets/c803ad67-0123-49e3-b1b2-58baf2746194" />
 
 
 
